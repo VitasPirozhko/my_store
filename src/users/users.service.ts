@@ -1,12 +1,13 @@
 import { InjectModel } from '@nestjs/sequelize';
-import { Injectable } from '@nestjs/common';
+import { ForbiddenException, Injectable } from '@nestjs/common';
 import { User } from './models/user.entity';
+import { CreateUserDto } from './dto/create-user.dto';
 
 @Injectable()
 export class UsersService {
   constructor(@InjectModel(User) private usersRepository: typeof User) {}
 
-  findOne(username: string): Promise<User> {
+  findOne(username: string): Promise<CreateUserDto> {
     return this.usersRepository.findOne({
       where: {
         username,
@@ -14,8 +15,12 @@ export class UsersService {
     });
   }
 
-  createUser(user: User): Promise<User> {
-    console.log(user);
-    return this.usersRepository.create({ ...user });
+  createUser(user: CreateUserDto) {
+    return this.findOne(user.username).then((data) => {
+      if (!!data) throw new ForbiddenException('User already exists');
+
+      this.usersRepository.create(user);
+      return 'Created';
+    });
   }
 }

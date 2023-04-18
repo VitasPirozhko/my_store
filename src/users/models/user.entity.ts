@@ -1,7 +1,8 @@
 import { Table, Column, Model } from 'sequelize-typescript';
+import { CreateUserDto } from '../dto/create-user.dto';
 
-@Table
-export class User extends Model {
+@Table({ tableName: 'users', timestamps: false })
+export class User extends Model<CreateUserDto> {
   @Column
   username: string;
 
