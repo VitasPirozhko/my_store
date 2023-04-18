@@ -26,10 +26,11 @@ export class UsersService {
   //   return this.usersRepository.findAll<User>();
   // }
 
-  findOne(id: string): Promise<User> {
+  findOne(username: string): Promise<User> {
+    console.log(username);
     return this.usersRepository.findOne({
       where: {
-        id,
+        username,
       },
     });
   }
