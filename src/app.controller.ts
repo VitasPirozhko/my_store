@@ -6,19 +6,14 @@ import { Public } from './decorators';
 export class AppController {
   constructor(private authService: AuthService) {}
 
+  @Public()
   @Post('auth/login')
   async login(@Request() req) {
-    return this.authService.login(req.user);
+    return this.authService.login(req.body);
   }
 
   @Get('profile')
   getProfile(@Request() req) {
     return req.user;
-  }
-
-  @Public()
-  @Get('public')
-  findAll() {
-    return 'is public request (skip auth)';
   }
 }
