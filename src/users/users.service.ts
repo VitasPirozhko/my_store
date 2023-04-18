@@ -1,4 +1,5 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/sequelize';
+import { Injectable } from '@nestjs/common';
 import { User } from './models/user.entity';
 
 @Injectable()
@@ -19,10 +20,7 @@ export class UsersService {
   // async findOne(username: string): Promise<User | undefined> {
   //   return this.users.find((user) => user.username === username);
   // }
-  constructor(
-    @Inject('USER_REPOSITORY')
-    private usersRepository: typeof User,
-  ) {}
+  constructor(@InjectModel(User) private usersRepository: typeof User) {}
 
   // async findAll(): Promise<User[]> {
   //   return this.usersRepository.findAll<User>();
