@@ -27,11 +27,10 @@ export class UsersService {
   // }
 
   findOne(id: string): Promise<User> {
-    return this.usersRepository[0];
-    // return this.usersRepository.findOne({
-    //   where: {
-    //     id,
-    //   },
-    // });
+    return this.usersRepository.findOne({
+      where: {
+        id,
+      },
+    });
   }
 }
