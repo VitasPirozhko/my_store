@@ -4,6 +4,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { User } from './users/models/user.entity';
+import { AuthController } from './auth/auth.controller';
 
 @Module({
   imports: [
@@ -19,7 +20,7 @@ import { User } from './users/models/user.entity';
     }),
     AuthModule,
   ],
-  controllers: [AppController],
+  controllers: [AppController, AuthController],
   providers: [AppService],
 })
 export class AppModule {}
