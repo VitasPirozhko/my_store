@@ -2,6 +2,7 @@ import { InjectModel } from '@nestjs/sequelize';
 import { ForbiddenException, Injectable } from '@nestjs/common';
 import { User } from './models/user.entity';
 import { CreateUserDto } from './dto/create-user.dto';
+import * as bcrypt from 'bcryptjs';
 
 @Injectable()
 export class UsersService {
@@ -16,10 +17,14 @@ export class UsersService {
   }
 
   createUser(user: CreateUserDto) {
-    return this.findOne(user.username).then((data) => {
+    return this.findOne(user.username).then(async (data) => {
       if (!!data) throw new ForbiddenException('User already exists');
 
-      this.usersRepository.create(user);
+      const cryptPass = await bcrypt.hash(user.password, 5);
+      this.usersRepository.create({
+        ...user,
+        password: cryptPass,
+      });
       return 'Created';
     });
   }
