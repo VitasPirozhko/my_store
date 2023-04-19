@@ -5,6 +5,8 @@ import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { User } from './users/models/user.entity';
 import { AuthController } from './auth/auth.controller';
+import { ProductsModule } from './products/products.module';
+import { ProductsController } from './products/products.controller';
 
 @Module({
   imports: [
@@ -19,6 +21,7 @@ import { AuthController } from './auth/auth.controller';
       models: [User],
     }),
     AuthModule,
+    ProductsModule,
   ],
   controllers: [AppController, AuthController],
   providers: [AppService],

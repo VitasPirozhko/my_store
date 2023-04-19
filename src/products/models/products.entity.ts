@@ -1,8 +1,7 @@
 import { Table, Column, Model, DataType } from 'sequelize-typescript';
-import { CreateUserDto } from '../dto/create-user.dto';
 
-@Table({ tableName: 'users', timestamps: false })
-export class User extends Model<CreateUserDto> {
+@Table({ tableName: 'products', timestamps: false })
+export class Product extends Model {
   @Column({
     type: DataType.INTEGER,
     unique: true,
@@ -12,8 +11,11 @@ export class User extends Model<CreateUserDto> {
   id: number;
 
   @Column
-  username: string;
+  img: string;
 
   @Column
-  password: string;
+  name: string;
+
+  @Column
+  price: number;
 }
