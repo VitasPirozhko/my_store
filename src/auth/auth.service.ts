@@ -22,10 +22,14 @@ export class AuthService {
     throw new ForbiddenException('Invalid password');
   }
 
-  login(user: any) {
-    const payload = { username: user.username, id: user.id };
+  async login(loginUserBody: any) {
+    const user = await this.usersService.findOne(loginUserBody.username);
+    console.log(user);
     return {
-      access_token: this.jwtService.sign(payload),
+      access_token: this.jwtService.sign({
+        username: user.username,
+        id: user.id,
+      }),
     };
   }
 

@@ -8,7 +8,7 @@ import * as bcrypt from 'bcryptjs';
 export class UsersService {
   constructor(@InjectModel(User) private usersRepository: typeof User) {}
 
-  findOne(username: string): Promise<CreateUserDto> {
+  findOne(username: string): Promise<User> {
     return this.usersRepository.findOne({
       where: {
         username,
