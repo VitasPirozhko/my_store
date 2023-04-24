@@ -6,7 +6,6 @@ import { AuthModule } from './auth/auth.module';
 import { User } from './users/models/user.entity';
 import { AuthController } from './auth/auth.controller';
 import { ProductsModule } from './products/products.module';
-import { ProductsController } from './products/products.controller';
 
 @Module({
   imports: [
