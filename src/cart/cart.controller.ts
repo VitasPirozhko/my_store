@@ -1,4 +1,12 @@
-import { Controller, Post, UseGuards, Headers, Body } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  UseGuards,
+  Headers,
+  Body,
+  Delete,
+  Param,
+} from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { CartService } from './cart.service';
 import { decodeAuth } from 'src/helpers';
@@ -10,7 +18,7 @@ export class CartController {
 
   @UseGuards(JwtAuthGuard)
   @Post()
-  getProducts(
+  addProductInToCart(
     @Body() body: CartItemDto,
     @Headers('Authorization') auth: string,
   ) {
@@ -18,5 +26,11 @@ export class CartController {
     const { productId } = body;
 
     return this.cartService.addProductInToUserCart(userId, +productId);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Delete(':id/')
+  deleteProductFromCart(@Param('id') id: number) {
+    return this.cartService.removeProductInToUserCart(+id);
   }
 }

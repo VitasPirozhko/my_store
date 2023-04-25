@@ -17,4 +17,12 @@ export class CartService {
       productId,
     });
   }
+
+  removeProductInToUserCart(id: number) {
+    return this.cartRepository.destroy({
+      where: {
+        id,
+      },
+    });
+  }
 }
