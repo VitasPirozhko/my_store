@@ -6,6 +6,7 @@ import { AuthModule } from './auth/auth.module';
 import { User } from './users/models/user.entity';
 import { AuthController } from './auth/auth.controller';
 import { ProductsModule } from './products/products.module';
+import { CartModule } from './cart/cart.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { ProductsModule } from './products/products.module';
     }),
     AuthModule,
     ProductsModule,
+    CartModule,
   ],
   controllers: [AppController, AuthController],
   providers: [AppService],
