@@ -6,6 +6,7 @@ import {
   Body,
   Delete,
   Param,
+  Get,
 } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { CartService } from './cart.service';
@@ -32,5 +33,13 @@ export class CartController {
   @Delete(':id/')
   deleteProductFromCart(@Param('id') id: number) {
     return this.cartService.removeProductInToUserCart(+id);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get()
+  getCart(@Headers('Authorization') auth: string) {
+    const { id: userId } = decodeAuth(auth);
+    console.log(userId);
+    return this.cartService.getCart(userId);
   }
 }
