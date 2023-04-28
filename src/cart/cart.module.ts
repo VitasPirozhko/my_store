@@ -4,9 +4,10 @@ import { CartItem } from './models/cart.entity';
 import { CartService } from './cart.service';
 import { CartController } from './cart.controller';
 import { ProductsModule } from 'src/products/products.module';
+import { MailModule } from 'src/mail/mail.module';
 
 @Module({
-  imports: [SequelizeModule.forFeature([CartItem]), ProductsModule],
+  imports: [SequelizeModule.forFeature([CartItem]), ProductsModule, MailModule],
   providers: [CartService],
   controllers: [CartController],
 })
